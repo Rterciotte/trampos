@@ -1,11 +1,9 @@
 class ApplicationController < ActionController::Base
-    before_action :configure_permitted_parameters, if: :devise_controller?
+    # before_action :configure_permitted_parameters, if: :devise_controller?
 
-    protected
+    # protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-        user_params.permit(:role, :email, :password, :password_confirmation)
-      end
-    end
+    # def configure_permitted_parameters
+    #   devise_parameter_sanitizer.permit(:sign_up, keys: [:role , :password_confirmation])
+    # end
 end

@@ -2,14 +2,14 @@ require 'rails_helper'
 
 feature 'User sign in' do
   scenario 'successfully' do
-    user = User.create!(email: 'rogerio@email.com', password: '123456')
+    user = User.create!(email: 'rogerio@email.com', password: '123456', role: 'applicant')
 
     visit root_path
     click_on 'Entrar'
     within('form') do
       fill_in 'E-mail', with: user.email
       fill_in 'Senha', with: '123456'
-      click_on 'Entrar'
+      click_on 'Acessar'
     end
 
     expect(page).to have_content user.email
@@ -19,14 +19,14 @@ feature 'User sign in' do
   end
 
   scenario 'and logout' do
-    user = User.create!(email: 'rogerio@email.com', password: '123456')
+    user = User.create!(email: 'rogerio@email.com', password: '123456', role: 'applicant')
 
     visit root_path
     click_on 'Entrar'
     within('form') do
       fill_in 'E-mail', with: user.email
       fill_in 'Senha', with: '123456'
-      click_on 'Entrar'
+      click_on 'Acessar'
     end
 
     click_on 'Sair'

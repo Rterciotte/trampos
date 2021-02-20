@@ -1,13 +1,29 @@
 pt-BR:
   activerecord:
     models:
-      user:
-        one: Usuário
-        other: Usuários
+      employee:
+        one: Colaborador
+        other: Colaboradores
+      applicant:
+        one: Candidato
+        other: Candidatos  
+      company: 
+        one: Empresa  
+        other: Empresas
     attributes:
-      user:
+      employee:
         email: E-mail
         password: Senha
-        role: Função
-        applicant: Candidato
-        employee: Colaborador
+        password_confirmation: Confirme sua senha
+      applicant:
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirme sua senha          
+      company:
+        name: Nome
+        logo: Logomarca
+        address: Endereço
+        cnpj: CNPJ
+        site: Site
+        social_media: Mídias Sociais
+        domain: Domínio  

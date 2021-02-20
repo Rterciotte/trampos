@@ -10,6 +10,10 @@
   </div>
 <% end %>
 
+<% if current_employee.admin == true %>
+  <p>Você é o Administrador desta empresa</p>
+<% end %>
+
 <h1>Cadastre sua empresa</h1>
 
 <%= form_with model: @company, local: true do |f| %>
@@ -41,6 +45,6 @@
         <%= f.label :domain %>
         <%= f.text_field :domain %>
     </div>
-    <%= f.submit 'Criar promoção' %>
+    <%= f.submit 'Cadastrar empresa' %>
 
 <% end %>

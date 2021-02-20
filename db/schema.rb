@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_180117) do
+ActiveRecord::Schema.define(version: 2021_02_20_040811) do
+
+  create_table "applicants", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_applicants_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_applicants_on_reset_password_token", unique: true
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -20,25 +32,38 @@ ActiveRecord::Schema.define(version: 2021_02_14_180117) do
     t.string "site"
     t.string "social_media"
     t.string "domain"
-    t.integer "user_id", null: false
+    t.integer "employee_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_companies_on_user_id"
+    t.index ["employee_id"], name: "index_companies_on_employee_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "role", default: 0
+    t.boolean "admin", default: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "companies", "users"
+  create_table "job_ads", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "salary_range"
+    t.integer "level"
+    t.date "mandatory_requirements"
+    t.integer "total_vacancy"
+    t.integer "employee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_job_ads_on_employee_id"
+  end
+
+  add_foreign_key "companies", "employees"
+  add_foreign_key "job_ads", "employees"
 end

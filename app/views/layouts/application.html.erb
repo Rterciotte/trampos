@@ -12,13 +12,26 @@
 
   <body>
     <nav>
-      <% if user_signed_in?  %>
-        <%= current_user.email%>
-        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-      <% else %>  
-        <%= link_to 'Entrar', new_user_session_path %>
-        <%= link_to 'Cadastrar-se', new_user_registration_path %>
-      <% end %>
+      <div>
+        <p>Procurando emprego? Cadastre-se ou acesse aqui</p>
+        <% if applicant_signed_in?  %>
+          <%= current_applicant.email%>
+          <%= link_to 'Sair', destroy_applicant_session_path, method: :delete %>
+        <% else %>  
+          <%= link_to 'Acesso para candidatos', new_applicant_session_path %>
+          <%= link_to 'Cadastro para candidatos', new_applicant_registration_path %>
+        <% end %>
+      </div>
+      <div>
+        <p>Procurando pessoas qualificadas? Cadastre-se ou acesse aqui</p>
+        <% if employee_signed_in?  %>
+          <%= current_employee.email%>
+          <%= link_to 'Sair', destroy_employee_session_path, method: :delete %>
+        <% else %>  
+          <%= link_to 'Acesso para colaboradores', new_employee_session_path %>
+          <%= link_to 'Cadastro para colaboradores', new_employee_registration_path %>
+        <% end %>
+      </div>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

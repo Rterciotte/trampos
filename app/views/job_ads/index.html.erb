@@ -1,0 +1,13 @@
+<% if @job_ads.empty? %>
+    <p>Nenhuma vaga cadastrada</p>
+<% else %>
+    <dl>
+      <% @job_ads.each do |job_ad| %>
+        <dt>Nome</dt>
+        <dd><%= link_to job_ad.title, job_ad %></dd>
+        <dt>Descrição</dt>
+        <dd><%= job_ad.description %></dd>
+        <hr>
+      <% end %>
+    </dl>
+<% end %>

@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-feature 'User sign in' do
+feature 'Emplooyee sign in' do
   scenario 'successfully' do
-    user = User.create!(email: 'rogerio@email.com', password: '123456', role: 'applicant')
+    employee = Employee.create!(email: 'rogerio@email.com', password: '123456', admin: false)
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Acesso para colaboradores'
     within('form') do
-      fill_in 'E-mail', with: user.email
+      fill_in 'E-mail', with: employee.email
       fill_in 'Senha', with: '123456'
       click_on 'Acessar'
     end
 
-    expect(page).to have_content user.email
+    expect(page).to have_content employee.email
     expect(page).to have_content 'Login efetuado com sucesso.'
     expect(page).to have_link 'Sair'
-    expect(page).not_to have_link 'Entrar'
+    expect(page).not_to have_link 'Acessar'
   end
 
   scenario 'and logout' do
-    user = User.create!(email: 'rogerio@email.com', password: '123456', role: 'applicant')
+    employee = Employee.create!(email: 'rogerio@email.com', password: '123456', admin: false)
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Acesso para colaboradores'
     within('form') do
-      fill_in 'E-mail', with: user.email
+      fill_in 'E-mail', with: employee.email
       fill_in 'Senha', with: '123456'
       click_on 'Acessar'
     end
@@ -33,8 +33,8 @@ feature 'User sign in' do
 
     within('nav') do
       expect(page).not_to have_link 'Sair'
-      expect(page).not_to have_content user.email
-      expect(page).to have_link 'Entrar'
+      expect(page).not_to have_content employee.email
+      expect(page).to have_link 'Acesso para colaboradores'
     end
 
   end

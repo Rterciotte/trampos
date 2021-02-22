@@ -24,6 +24,6 @@ class CompaniesController < ApplicationController
 
     def company_params
       params.require(:company)
-            .permit(:name, :logo, :address, :cnpj, :site, :social_media, :domain).merge(employee_id: current_employee.id)
+            .permit(:name, :logo, :address, :cnpj, :site, :social_media, :domain, primary_employee_id: current_employee.id)
     end
 end

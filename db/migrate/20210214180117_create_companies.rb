@@ -9,6 +9,7 @@ class CreateCompanies < ActiveRecord::Migration[6.1]
       t.string :social_media
       t.string :domain
       t.references :employee, null: false, foreign_key: true
+      
      
       t.timestamps
     end

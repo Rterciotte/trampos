@@ -1,0 +1,11 @@
+<% if @companies.empty? %>
+    <p>Nenhuma vaga cadastrada</p>
+<% else %>
+    <dl>
+      <% @companies.each do |company| %>
+        <dt>Nome</dt>
+        <dd><%= link_to company.name, company %></dd>
+        <br/>
+      <% end %>
+    </dl>
+<% end %>

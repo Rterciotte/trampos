@@ -10,6 +10,9 @@ pt-BR:
       company: 
         one: Empresa  
         other: Empresas
+      job_ad:
+        one: Vaga de emprego
+        other: Vagas de emprego  
     attributes:
       employee:
         email: E-mail
@@ -26,4 +29,11 @@ pt-BR:
         cnpj: CNPJ
         site: Site
         social_media: Mídias Sociais
-        domain: Domínio  
+        domain: Domínio
+      job_ad:
+        title: Título
+        description: Descrição
+        salary_range: Faixa salarial
+        level: Nível
+        mandatory_requirements: Requisitos obrigatórios
+        total_vacancy: Total de vagas    

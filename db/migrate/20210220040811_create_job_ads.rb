@@ -7,7 +7,7 @@ class CreateJobAds < ActiveRecord::Migration[6.1]
       t.integer :level
       t.date :mandatory_requirements
       t.integer :total_vacancy
-      t.references :employee, null: false, foreign_key: true
+      t.references :company, null: false, foreign_key: true
 
       t.timestamps
     end

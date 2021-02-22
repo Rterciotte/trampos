@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class Employees::RegistrationsController < Devise::RegistrationsController
-      
+ 
   def after_sign_up_path_for(resource)
     domain = resource.gsub(/.+@([^.]+).+/, '\1')
-    if current_employee && domain_is_free?(domain)
-      @employee.admin = true
+    if domain_is_free?(domain)
       @employee.save
-      redirect_to new_company_path
+      redirect_to edit_company_path(@company)
       flash[:notice] = "Não identificamos o domínio #{domain}, por favor registre-o"
     else
       redirect_to root_path
@@ -15,12 +14,14 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    @employee = Employee.new(employee_params)
-    if @employee.save
-      sign_in(@employee)
-      after_sign_up_path_for(@employee.email)
-    else
-      render :new
+    run_callbacks :create do
+      @employee = Employee.new(employee_params)
+      if @employee.save
+        sign_in(@employee)
+        after_sign_up_path_for(@employee.email)
+      else
+        render :new
+      end
     end    
   end
 
@@ -56,7 +57,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   def employee_params
     params.require(:employee)
-        .permit(:email, :password, :password_confirmation )
+        .permit(:email, :password, :password_confirmation)
   end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

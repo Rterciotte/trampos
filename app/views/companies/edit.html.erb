@@ -1,0 +1,40 @@
+<% if @company.errors.any? %>
+  <div class="alert">
+    <p>Não foi possível editar a empresa</p>
+    <p>Confira os erros abaixo:</p>
+    <ul>
+      <% @company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>    
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @company, local: true do |f| %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div>
+        <%= f.label :logo %>
+        <%= f.text_field :logo %>
+    </div>
+    <div>
+        <%= f.label :address%>
+        <%= f.text_field :address %>
+    </div>
+    <div>
+        <%= f.label :cnpj %>
+        <%= f.number_field :cnpj %>
+    </div>
+    <div>
+        <%= f.label :site %>
+        <%= f.text_field :site %>
+    </div>
+    <div>
+        <%= f.label :social_media %>
+        <%= f.text_field :social_media %>
+    </div>
+    <%= f.submit 'Enviar' %>
+
+<% end %>

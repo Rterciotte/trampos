@@ -1,7 +1,7 @@
 <%= link_to 'Voltar', companies_path %>
 
 <h1><%= @company.name %></h1>
-<span>Administrada por: <%= @company.employee.email %></span>
+
 <dl>
   <dt><%= Company.human_attribute_name(:logo) %></dt>
   <dd><%= @company.logo %></dd>
@@ -17,3 +17,7 @@
   <dd><%= @company.domain %></dd>
 
 </dl>
+
+<% if current_employee.email.gsub(/.+@([^.]+).+/, '\1') == @company.domain %>
+  <%= link_to 'Nova vaga', new_job_ad_path %>
+<% end %>

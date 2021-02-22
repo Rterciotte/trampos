@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2021_02_20_040811) do
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.boolean "admin", default: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -58,12 +57,12 @@ ActiveRecord::Schema.define(version: 2021_02_20_040811) do
     t.integer "level"
     t.date "mandatory_requirements"
     t.integer "total_vacancy"
-    t.integer "employee_id", null: false
+    t.integer "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_job_ads_on_employee_id"
+    t.index ["company_id"], name: "index_job_ads_on_company_id"
   end
 
   add_foreign_key "companies", "employees"
-  add_foreign_key "job_ads", "employees"
+  add_foreign_key "job_ads", "companies"
 end

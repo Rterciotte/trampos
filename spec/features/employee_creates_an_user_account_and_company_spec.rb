@@ -9,7 +9,7 @@ feature 'employee creates an account' do
       fill_in 'E-mail', with: 'rogerio@trampos.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirme sua senha', with: '123456'
-      click_on 'Sign up'
+      click_on 'Cadastrar'
     end
 
     expect(current_path).to eq new_company_path
@@ -26,7 +26,7 @@ feature 'employee creates an account' do
       fill_in 'E-mail', with: 'rogerio@trampos.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirme sua senha', with: '123456'
-      click_on 'Sign up'
+      click_on 'Cadastrar'
     end
     expect(current_path).to eq new_company_path
 
@@ -57,7 +57,7 @@ feature 'employee creates an account' do
       fill_in 'E-mail', with: 'mariana@trampos.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirme sua senha', with: '123456'
-      click_on 'Sign up'
+      click_on 'Cadastrar'
     end
     expect(current_path).to eq root_path
   end

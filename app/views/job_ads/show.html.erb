@@ -1,0 +1,19 @@
+<%= link_to 'Voltar', job_ads_path %>
+
+<h1><%= @job_ad.name %></h1>
+<span>Criada por: <%= @job_ad.employee.email %></span>
+<dl>
+  <dt><%= JobAd.human_attribute_name(:title) %></dt>
+  <dd><%= @job_ad.title %></dd>
+  <dt><%= JobAd.human_attribute_name(:description) %></dt>
+  <dd><%= @job_ad.description %></dd>
+  <dt><%= JobAd.human_attribute_name(:salary_range) %></dt>
+  <dd><%= @job_ad.salary_range %></dd>
+  <dt><%= JobAd.human_attribute_name(:level) %></dt>
+  <dd><%= @job_ad.level %></dd>
+  <dt><%= JobAd.human_attribute_name(:mandatory_requirements) %></dt>
+  <dd><%= @job_ad.mandatory_requirements %></dd>
+  <dt><%= JobAd.human_attribute_name(:total_vacancy) %></dt>
+  <dd><%= @job_ad.total_vacancy %></dd>
+
+</dl>

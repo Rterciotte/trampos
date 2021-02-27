@@ -21,6 +21,37 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <%= f.fields_for :company do |company_fields| %>
+    <div>
+        <%= company_fields.label :name %>
+        <%= company_fields.text_field :name %>
+    </div>
+    <div>
+        <%= company_fields.label :logo %>
+        <%= fcompany_fields.text_field :logo %>
+    </div>
+    <div>
+        <%= company_fields.label :address%>
+        <%= company_fields.text_field :address %>
+    </div>
+    <div>
+        <%= company_fields.label :cnpj %>
+        <%= company_fields.number_field :cnpj %>
+    </div>
+    <div>
+        <%= company_fields.label :site %>
+        <%= company_fields.text_field :site %>
+    </div>
+    <div>
+        <%= company_fields.label :social_media %>
+        <%= company_fields.text_field :social_media %>
+    </div>
+    <div>
+        <%= company_fields.label :domain %>
+        <%= company_fields.text_field :domain %>
+    </div>
+  <% end %>  
+
   <div class="actions">
     <%= f.submit "Cadastrar" %>
   </div>

@@ -9,13 +9,17 @@ feature 'employee creates an account' do
       fill_in 'E-mail', with: 'rogerio@trampos.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirme sua senha', with: '123456'
+      fill_in 'Nome', with: 'Trampos' 
+      fill_in 'Logomarca', with: 'trampos.gif'
+      fill_in 'Endereço', with: 'Avenida Rio Branco, 300'
+      fill_in 'CNPJ', with: '8234-8273-928383'
+      fill_in 'Site', with: 'www.trampos.com.br' 
+      fill_in 'Mídias Sociais', with: '@trampos_twitter' 
+      fill_in 'Domínio', with: 'trampos.com'
       click_on 'Cadastrar'
     end
-
-    expect(current_path).to eq new_company_path
-    expect(page).to have_content 'Não identificamos o domínio trampos, por favor registre-o'  
-    expect(page).to have_content 'Cadastre sua empresa'
-    expect(page).to have_content 'Você é o Administrador desta empresa'
+    company = Company.last
+    expect(current_path).to eq(company_path(company))
   end
 
   scenario 'and register a company' do
@@ -36,7 +40,7 @@ feature 'employee creates an account' do
     fill_in 'CNPJ', with: '8234-8273-928383'
     fill_in 'Site', with: 'www.trampos.com.br' 
     fill_in 'Mídias Sociais', with: '@trampos_twitter' 
-    fill_in 'Domínio', with: 'trampos'
+    fill_in 'Domínio', with: 'trampos.com'
 
     click_on 'Cadastrar empresa'
 
@@ -45,7 +49,7 @@ feature 'employee creates an account' do
   end
 
   scenario 'and is not the first register of a domain' do
-    employee = Employee.create!(email: 'rogerio@email.com', password: '123456', admin: true)
+    employee = Employee.create!(email: 'rogerio@email.com', password: '123456')
     company = Company.create!(name: 'Trampos', logo: 'trampos.gif', address: 'Avenida Rio Branco, 300', 
                               cnpj: '8234-8273-928383', site: 'www.trampos.com.br', 
                               social_media: '@trampos_twitter', domain: 'trampos', employee_id: employee.id)

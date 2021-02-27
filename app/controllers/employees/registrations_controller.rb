@@ -2,27 +2,28 @@
 
 class Employees::RegistrationsController < Devise::RegistrationsController
  
-  def after_sign_up_path_for(resource)
-    domain = resource.gsub(/.+@([^.]+).+/, '\1')
-    if domain_is_free?(domain)
-      @employee.save
-      redirect_to edit_company_path(@company)
-      flash[:notice] = "Não identificamos o domínio #{domain}, por favor registre-o"
-    else
-      redirect_to root_path
-    end
-  end
+  # before_filter :configure_permitted_parameters
 
+  def new
+    @employee = Employee.new(employee_params)
+     @company = Company.new(employee_params)
+    build_resource({})
+    resource.build_company
+    respond_with self.resource
+  end
+  
   def create
-    run_callbacks :create do
-      @employee = Employee.new(employee_params)
-      if @employee.save
-        sign_in(@employee)
-        after_sign_up_path_for(@employee.email)
-      else
-        render :new
+    @employee = Employee.new(employee_params)
+    @company = Company.new(employee_params)
+    if @employee.save
+      sign_in(@employee)
+      if domain_is_free?(@employee.email)
+        @company.save
+        redirect_to @company
       end
-    end    
+    else
+      render :new
+    end
   end
 
   # GET /resource/edit
@@ -51,14 +52,21 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def domain_is_free?(employee_mail)
-    !Company.exists?(['domain LIKE ?', "%#{employee_mail.gsub(/.+@([^.]+).+/, '\1')}%"])
-  end 
+  def domain_is_free?(email)
+    !Company.exists?(['domain LIKE ?', "%#{email.split('@').last}%"])
+  end
 
   def employee_params
     params.require(:employee)
-        .permit(:email, :password, :password_confirmation)
+          .permit(:email, :password, :password_confirmation, company_attributes: [:name, :logo, :address, :cnpj, :site, :social_media, :domain])
   end
+
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.for(:sign_up) { |u|
+  #     u.permit(:email, :password, :password_confirmation, :company_attributes=> :name, :logo, :address, :cnpj, :site, :social_media, :domain)
+  #   }
+  # end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])

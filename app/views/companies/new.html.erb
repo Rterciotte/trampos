@@ -10,10 +10,6 @@
   </div>
 <% end %>
 
-<% if current_employee.admin == true %>
-  <p>Você é o Administrador desta empresa</p>
-<% end %>
-
 <h1>Cadastre sua empresa</h1>
 
 <%= form_with model: @company, local: true do |f| %>

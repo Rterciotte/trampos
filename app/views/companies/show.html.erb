@@ -18,6 +18,6 @@
 
 </dl>
 
-<% if current_employee.email.gsub(/.+@([^.]+).+/, '\1') == @company.domain %>
+<% if current_employee.email.split('@').last == @company.domain %>
   <%= link_to 'Nova vaga', new_job_ad_path %>
 <% end %>

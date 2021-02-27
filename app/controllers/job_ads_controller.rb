@@ -8,13 +8,15 @@ class JobAdsController < ApplicationController
     end
 
     def new
-      @job_ads = JobAd.new()
+      @company = Company.find(params[:company_id])
+      @job_ad = JobAd.new
     end
     
     def create
-      @job_ads = JobAd.new(job_ad_params)
-      if @job_ads.save
-        redirect_to @job_ads
+      @company = Company.find(params[:company_id])
+      @job_ad = JobAd.new(job_ad_params)
+      if @job_ad.save
+        redirect_to @job_ad
       else
         render :new
       end             
@@ -26,6 +28,6 @@ class JobAdsController < ApplicationController
       params.require(:job_ad)
             .permit(:title, :description, :salary_range, :level, :site, :mandatory_requirements, :total_vacancy)
             .merge(employee_id: current_employee.id)
-            .merge(company_id: @company.id)
-    end
+    end        
 end
+

@@ -14,7 +14,10 @@
         <%= f.label :salary_range %>
         <%= f.text_field :salary_range %>
     </div>
-
+    <div>
+        <%= f.label :level %>
+        <%= f.select :level, JobAd.levels.keys.map { |l| [l.humanize, l] } %>
+    </div>
     <div>
         <%= f.label :mandatory_requirements %>
         <%= f.text_field :mandatory_requirements %>

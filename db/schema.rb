@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_040811) do
+ActiveRecord::Schema.define(version: 2021_02_23_032327) do
 
   create_table "applicants", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2021_02_20_040811) do
     t.index ["employee_id"], name: "index_companies_on_employee_id"
   end
 
+  create_table "companies_employees", id: false, force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.integer "company_id", null: false
+    t.index ["company_id", "employee_id"], name: "index_companies_employees_on_company_id_and_employee_id"
+    t.index ["employee_id", "company_id"], name: "index_companies_employees_on_employee_id_and_company_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,11 +65,14 @@ ActiveRecord::Schema.define(version: 2021_02_20_040811) do
     t.date "mandatory_requirements"
     t.integer "total_vacancy"
     t.integer "company_id", null: false
+    t.integer "employee_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_job_ads_on_company_id"
+    t.index ["employee_id"], name: "index_job_ads_on_employee_id"
   end
 
   add_foreign_key "companies", "employees"
   add_foreign_key "job_ads", "companies"
+  add_foreign_key "job_ads", "employees"
 end

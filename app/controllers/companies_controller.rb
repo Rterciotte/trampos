@@ -8,10 +8,12 @@ class CompaniesController < ApplicationController
     end
 
     def new
-      @company = Company.new()
+      @employee = Employee.find(company_params[:employee_id])
+      @company = Company.new(company_params)
     end
     
     def create
+      @employee = Employee.find(company_params[:employee_id])
       @company = Company.new(company_params)
       if @company.save
         redirect_to @company
@@ -24,6 +26,6 @@ class CompaniesController < ApplicationController
 
     def company_params
       params.require(:company)
-            .permit(:name, :logo, :address, :cnpj, :site, :social_media, :domain, primary_employee_id: current_employee.id)
+            .permit(:name, :logo, :address, :cnpj, :site, :social_media, :domain).merge(employee_id: current_employee.id)
     end
 end

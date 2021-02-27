@@ -15,7 +15,7 @@ feature 'employee register an job ad' do
     fill_in 'Título', with: 'Desenvolvedor C# Senior'
     fill_in 'Descrição', with: 'Buscamos desenvolvedores com ampla experiência em linguagem C#'
     fill_in 'Faixa salarial', with: 10000
-    select 'senior', from: 'Nível' 
+    select 'Senior', from: 'Nível' 
     fill_in 'Requisitos obrigatórios', with: 'Experiência em C#, '
     fill_in 'Total de vagas', with: 3
     
